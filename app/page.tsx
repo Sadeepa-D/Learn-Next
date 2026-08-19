@@ -1,7 +1,7 @@
 import welcome from "../lib/welcome";
 import user from "../lib/user";
 import AddUserForm from "@/components/AddUserForm";
-import DeleteBtn from "@/components/Deletebtn";
+import { deleteUser } from "./actions/UserActions";
 
 export default function Home() {
   const users = user.getAllUsers();
@@ -57,7 +57,16 @@ export default function Home() {
                         {user.email}
                       </td>
                       <td>
-                        <DeleteBtn id={user.id} />
+                        <form action={deleteUser}>
+                          <input type="hidden" name="id" value={user.id} />
+
+                          <button
+                            type="submit"
+                            className="text-red-600 hover:text-red-800 ml-2"
+                          >
+                            Delete
+                          </button>
+                        </form>
                       </td>
                     </tr>
                   ))}
